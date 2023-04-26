@@ -11,12 +11,7 @@ func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: tcp_client <message>")
 	}
-/*
- messageBytes := []byte(os.Args[1]) 
- messageRunes := make([]rune, len(messageBytes))
-     for i, b := range messageBytes {
-         messageRunes[i], _ = utf8.DecodeRune([]byte{b})     }
-*/
+
 messageRunes := []rune(os.Args[1])
 kryptertMelding := mycrypt.Krypter(messageRunes, mycrypt.ALF_SEM03, 4)
 	log.Println("Kryptert melding: ", string(kryptertMelding))
