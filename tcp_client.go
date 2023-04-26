@@ -11,7 +11,14 @@ func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: tcp_client <message>")
 	}
-kryptertMelding := mycrypt.Krypter([]rune(os.Args[1]), mycrypt.ALF_SEM03, 4)
+/*
+ messageBytes := []byte(os.Args[1]) 
+ messageRunes := make([]rune, len(messageBytes))
+     for i, b := range messageBytes {
+         messageRunes[i], _ = utf8.DecodeRune([]byte{b})     }
+*/
+messageRunes := []rune(os.Args[1])
+kryptertMelding := mycrypt.Krypter(messageRunes, mycrypt.ALF_SEM03, 4)
 	log.Println("Kryptert melding: ", string(kryptertMelding))
 conn, err := net.Dial("tcp", "172.17.0.2:8080")
 	if err != nil {
@@ -27,6 +34,9 @@ buf := make([]byte, 1024)
 	if err != nil {
 		log.Fatal(err)
 	}
-response := string(buf[:n])
-	log.Printf("Reply from server: %s", response)
+//response := string(buf[:n])
+bufRunes := []rune(string(buf[:n]))
+dekryptertMelding := mycrypt.Krypter(bufRunes, mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
+     log.Println("Dekryptert melding: ", string(dekryptertMelding))
+	//log.Printf("Reply from proxy: %s", response)
 }
