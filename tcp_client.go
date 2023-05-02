@@ -32,6 +32,6 @@ buf := make([]byte, 1024)
 //response := string(buf[:n])
 bufRunes := []rune(string(buf[:n]))
 dekryptertMelding := mycrypt.Krypter(bufRunes, mycrypt.ALF_SEM03, len(mycrypt.ALF_SEM03)-4)
-     log.Println("Dekryptert melding: ", string(dekryptertMelding))
+     log.Println("Reply from proxy: ", string(dekryptertMelding))
 	//log.Printf("Reply from proxy: %s", response)
 }
